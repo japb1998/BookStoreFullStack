@@ -1,0 +1,16 @@
+.typed-out{
+    overflow: hidden;
+    border-right: .15em solid orange;
+    white-space: nowrap;
+    animation: typing 1.5s steps(20,end) forwards;
+    width: 0
+}
+@keyframes typing {
+    from{
+        width: 0;
+    }
+    to{
+    width: 100%;
+    border: 0;
+    }
+}
