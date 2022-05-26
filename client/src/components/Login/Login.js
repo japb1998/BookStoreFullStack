@@ -21,10 +21,9 @@ export default function Login() {
     async function onSubmit(e) {
         e.preventDefault();
         const {data:{login:{token}},error} = await login();
-        if(!data)return 
+        if(error)return console.error(error) 
         storeToken(token);
         navigate("/") 
-        if(error)console.error(error)
     }
     
     return (

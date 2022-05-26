@@ -32,13 +32,13 @@ export default function Login() {
             navigate("/")
         }
         catch (err) {
-            console.log(error.message)
+            console.log(err.message)
         }
     }
 
     return (
         <>
-            {loading ? <div className='text-4xl mx-auto'>loading...</div> : (
+           
                 <div className='w-screen  h-screen flex justify-center items-center animate'>
                     <form className="px-6 py-12 border rounded border-gray-300  w-6/12 max-w-xl drop-shadow-xl bg-gray-100" onSubmit={onSubmit}>
                         <div className="mb-6">
@@ -60,7 +60,7 @@ export default function Login() {
                         {error && <div className='text-white p-1 bg-red-500 rounded mt-2'>{error?.message}</div>}
                     </form>
 
-                </div>)}
+                </div>
         </>
     )
 }
