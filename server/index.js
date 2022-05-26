@@ -49,9 +49,9 @@ async function startApolloServer(typeDefs, resolvers) {
     path: '/graphql'
   });
 
-  // app.get('*',(req,res) =>{
-  //   res.sendFile(path.join(__dirname,"../client/build/index.html"))
-  // })
+  app.get('*',(req,res) =>{
+    res.sendFile(path.join(__dirname,"../client/build/index.html"))
+  })
   // Modified server startup
   await new Promise(resolve => httpServer.listen({ port: process.env.PORT || 4000 }, resolve));
   console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
