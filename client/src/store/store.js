@@ -8,10 +8,10 @@ const StoreContext = React.createContext();
 function storeReducer(state,{action,payload=null}){
     switch(action){
         case 'saveBook':
-            return {...state,user:{savedBooks:[...state.user.savedBooks,payload]}}
+            return {...state,user:{...state.user,savedBooks:[...state.user.savedBooks,payload]}}
         case 'deleteBook':
             var newSaved = state.user.savedBooks.filter(book => book.bookId !== payload)
-            return  {...state,user:{savedBooks:[...newSaved]}}
+            return  {...state,user:{...state.user,savedBooks:[...newSaved]}}
         case 'login':
             return  {...state,user:{...payload}}
         case 'logout':

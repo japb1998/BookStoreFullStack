@@ -11,7 +11,7 @@ import './index.css'
 export default function Login() {
     const [form, setForm] = useState({ email: "", password: "", username: "" });
     let navigate = useNavigate();
-    const [signUp, { data, loading, error, reset }] = useMutation(SIGN_UP, {
+    const [signUp, { data, loading, error}] = useMutation(SIGN_UP, {
         variables: {
             input: form
         },
@@ -31,14 +31,14 @@ export default function Login() {
             storeToken(token);
             navigate("/")
         }
-        catch (error) {
-            reset();
+        catch (err) {
+            console.log(error.message)
         }
     }
 
     return (
         <>
-            {loading ? <div className='text-lg'>loading</div> : (
+            {loading ? <div className='text-4xl mx-auto'>loading...</div> : (
                 <div className='w-screen  h-screen flex justify-center items-center animate'>
                     <form className="px-6 py-12 border rounded border-gray-300  w-6/12 max-w-xl drop-shadow-xl bg-gray-100" onSubmit={onSubmit}>
                         <div className="mb-6">
@@ -57,6 +57,7 @@ export default function Login() {
                             <button type="submit" className='border rounded bg-gray-700 text-white p-1  pr-2 w-24' onSubmit={onSubmit} >Register</button>
                             <a onClick={(e) => { e.preventDefault(); navigate('/login') }} className='text-blue-400 text-sm ml-6'>or Login</a>
                         </div>
+                        {error && <div className='text-white p-1 bg-red-500 rounded mt-2'>{error?.message}</div>}
                     </form>
 
                 </div>)}

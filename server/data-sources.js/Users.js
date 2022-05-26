@@ -78,9 +78,15 @@ module.exports = class Users extends MongoDataSource {
         user
       }
     }
-    catch (err) {
-      console.error(err)
-      throw new ApolloError(err.message)
+    catch (error) {
+      if(error.message.split(' ').includes('E11000')){
+        if(error.message.split(' ').includes('username:')){
+          
+          throw new ApolloError('Username is in use')
+        }
+        throw new ApolloError('Email is in use')
+      }
+      throw new ApolloError(error.message)
     }
   }
 }

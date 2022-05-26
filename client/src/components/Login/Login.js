@@ -41,7 +41,9 @@ export default function Login() {
                 <div className='flex items-center'>
                 <button type="submit" className='border rounded bg-gray-700 text-white p-1  pr-2 w-24' onClick={onSubmit} >Login</button>
                 <a onClick={(e)=>{ e.preventDefault(); navigate('/register')}} className='text-blue-400 text-sm ml-6'>or Register</a>
+                
                 </div>
+                {error && <div className='text-white p-1 bg-red-500 rounded mt-2'>{error?.message}</div>}
             </form>
             
         </div>
