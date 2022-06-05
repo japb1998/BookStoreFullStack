@@ -1,12 +1,12 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { Link,useNavigate} from 'react-router-dom'
 import './NavBar.css'
-import {removeItem} from '../../utils/auth';
+import {removeItem,retreiveToken} from '../../utils/auth';
 import { useStore } from '../../store/store';
 
 export default function NavBar() {
     const {dispatch,state} = useStore();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     let nav = [{
         route: '/saved',
         name: 'Saved Books'

@@ -42,7 +42,8 @@ module.exports = class Users extends MongoDataSource {
   }
   async login(username,password){
     try{
-      const user = await this.model.findOne({username})
+      const user = await this.model.findOne({username});
+      console.log(user)
       if(!user) throw new AuthenticationError('Username or password are incorrect')
       if(await user.comparePassword(password)){
         user.password = undefined

@@ -4,7 +4,7 @@ import { useStore } from '../../store/store';
 import { SAVE_BOOK, GET_ME, REMOVE_BOOK } from "../../utils/queries";
 import './index.css'
 export default function BookCard({ book,saved,removeBook }) {
-  const {dispatch} = useStore();
+  const {dispatch,state} = useStore();
   //refetch queries after we add a book, so we can update the cache
   const [saveBookMutation] = useMutation(SAVE_BOOK,{
     onCompleted:({data})=>{
@@ -64,10 +64,11 @@ export default function BookCard({ book,saved,removeBook }) {
               {book?.description}
             </p>
           )}
-          <button
+          {!!state.user && <button
             onClick={saved ? handleRemove : handleSave}
-            className={`inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white  rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 bg-blue-600  absolute bottom-[10px] left-[10px]`}
-          >
+            className={`inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white  rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 bg-blue-600  absolute bottom-[10px] left-[10px]`}> 
+          
+        
             {saved && (
               <span className="flex h-3 w-3 top-0 -mt-1 -ml-1 left-0 absolute">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
@@ -88,6 +89,7 @@ export default function BookCard({ book,saved,removeBook }) {
               ></path>
             </svg>
           </button>
+          }
         </div>
       </div>
     );

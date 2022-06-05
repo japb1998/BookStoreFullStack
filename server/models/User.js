@@ -18,10 +18,17 @@ const UserSchema = new Schema({
         required: [true, "password required"]
     },
     savedBooks: [Book]
-})
+},{
+    toJSON: {
+      virtuals: true,
+    },
+  })
 //MONGO HOOKS FOR AUTHENTICATION 
 // Save Hook is not implemented in update operations so you need to use save() if you are planing to change
 //the password
+UserSchema.virtual('bookCount').get(function(){
+    return this.savedBooks.length;
+})
 UserSchema.pre('save',async function(next){
     if(!this.isModified('password')) return next();
     const hashedPassword = await bcrypt.hash(this.password,saltRounds)
@@ -37,7 +44,6 @@ UserSchema.methods.comparePassword = async function comparePassword(password){
         throw error 
     }
 }
-
 
 const User = model('User', UserSchema)
 
